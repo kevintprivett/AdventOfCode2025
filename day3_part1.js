@@ -14,8 +14,6 @@ fileInput.addEventListener('change', (event) => {
       const fileContent = e.target.result
       inputArray = fileContent.split('\n')
       inputArray.pop()
-
-      console.log(inputArray)
     }
 
     reader.readAsText(file)
