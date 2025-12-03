@@ -38,8 +38,6 @@ solveButton.addEventListener('click', () => {
       }
     }
 
-    console.log(`bank: ${bank}\ntensPlace: ${tensPlace}, onesPlace: ${onesPlace}`)
-
     result += tensPlace * 10 + onesPlace
   }
 
