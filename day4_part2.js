@@ -24,6 +24,56 @@ fileInput.addEventListener('change', (event) => {
   }
 })
 
+// solveButton.addEventListener('click', () => {
+//   let result = 0
+//   const startTime = Date.now()
+
+//   const NEIGHBORS = [
+//     [-1, -1],
+//     [-1, 0],
+//     [-1, 1],
+//     [0, -1],
+//     [0, 1],
+//     [1, -1],
+//     [1, 0],
+//     [1, 1]
+//   ]
+
+//   let changed = true
+
+//   while (changed) {
+//     changed = false
+
+//     for (let i = 0; i < inputArray.length; i++) {
+//       for (let j = 0; j < inputArray[i].length; j++) {
+//         if (inputArray[i][j] !== '.') {
+//           let neighborCount = 0
+
+//           for (const [di, dj] of NEIGHBORS) {
+//             // js stuff...
+//             const neighbor = inputArray?.[i+di]?.[j+dj]
+
+//             if (neighbor !== undefined && neighbor === '@') {
+//               neighborCount++
+//             }
+//           }
+
+//           if (neighborCount < 4) {
+//             result++
+//             inputArray[i][j] = '.'
+//             changed = true
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   resultText.hidden = false;
+//   resultText.innerText = `Result: ${result}`
+//   timeText.hidden = false;
+//   timeText.innerText = `Time(ms): ${Date.now() - startTime}`
+// })
+
 solveButton.addEventListener('click', () => {
   let result = 0
   const startTime = Date.now()
@@ -39,32 +89,38 @@ solveButton.addEventListener('click', () => {
     [1, 1]
   ]
 
-  let changed = true
+  const dfs = (i, j) => {
+    if (inputArray[i][j] !== '.') {
+      let neighborCount = 0
 
-  while (changed) {
-    changed = false
+      for (const [di, dj] of NEIGHBORS) {
+        // js stuff...
+        const neighbor = inputArray?.[i+di]?.[j+dj]
 
-    for (let i = 0; i < inputArray.length; i++) {
-      for (let j = 0; j < inputArray[i].length; j++) {
-        if (inputArray[i][j] !== '.') {
-          let neighborCount = 0
+        if (neighbor !== undefined && neighbor === '@') {
+          neighborCount++
+        }
+      }
 
-          for (const [di, dj] of NEIGHBORS) {
-            // js stuff...
-            const neighbor = inputArray?.[i+di]?.[j+dj]
+      if (neighborCount < 4) {
+        result++
+        inputArray[i][j] = '.'
+        changed = true
 
-            if (neighbor !== undefined && neighbor === '@') {
-              neighborCount++
-            }
-          }
+        for (const [di, dj] of NEIGHBORS) {
+          const neighbor = inputArray?.[i+di]?.[j+dj]
 
-          if (neighborCount < 4) {
-            result++
-            inputArray[i][j] = '.'
-            changed = true
+          if (neighbor !== undefined && neighbor === '@') {
+            dfs(i+di, j+dj)
           }
         }
       }
+    }
+  }
+
+  for (let i = 0; i < inputArray.length; i++) {
+    for (let j = 0; j < inputArray[i].length; j++) {
+      dfs(i, j)
     }
   }
 
