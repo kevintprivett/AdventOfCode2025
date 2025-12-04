@@ -1,6 +1,7 @@
 const fileInput = document.getElementById('problem_input')
 const solveButton = document.getElementById('solveButton')
 const resultText = document.getElementById('result')
+const timeText = document.getElementById('time')
 
 let inputArray = []
 
@@ -25,6 +26,7 @@ fileInput.addEventListener('change', (event) => {
 
 solveButton.addEventListener('click', () => {
   let result = 0
+  const startTime = Date.now()
 
   const NEIGHBORS = [
     [-1, -1],
@@ -68,4 +70,6 @@ solveButton.addEventListener('click', () => {
 
   resultText.hidden = false;
   resultText.innerText = `Result: ${result}`
+  timeText.hidden = false;
+  timeText.innerText = `Time(ms): ${Date.now() - startTime}`
 })
