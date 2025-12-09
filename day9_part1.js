@@ -33,14 +33,6 @@ fileInput.addEventListener('change', (event) => {
 solveButton.addEventListener('click', () => {
   const startTime = Date.now()
 
-  const minX = inputArray.reduce((min, cur) => Math.min(min, cur[0]), Number.POSITIVE_INFINITY)
-  const minY = inputArray.reduce((min, cur) => Math.min(min, cur[1]), Number.POSITIVE_INFINITY)
-  const maxX = inputArray.reduce((max, cur) => Math.max(max, cur[0]), Number.NEGATIVE_INFINITY)
-  const maxY = inputArray.reduce((max, cur) => Math.max(max, cur[1]), Number.NEGATIVE_INFINITY)
-
-  console.log(`minX: ${minX}, maxX: ${maxX}`)
-  console.log(`minY: ${minY}, maxY: ${maxY}`)
-
   // greedy doesn't seem to work :'(
   let result = 0
 
